@@ -126,9 +126,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="startMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\olcPixelGameEngine.h" />
+    <ClInclude Include="startMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

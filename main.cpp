@@ -1,31 +1,27 @@
 
 // O------------------------------------------------------------------------------O
-// | pixelTest "Hello World" Program (main.cpp)                                     |
+// | PixelTest_c "Hello World" Program (main.cpp)                                     |
 // O------------------------------------------------------------------------------O
 #define OLC_PGE_APPLICATION
 #include "engine/olcPixelGameEngine.h"
+using namespace olc;
+bool fullscreenMode = false;
+
+#include "startMenu.h"
 
 #define G_PIXELSCALE_X      4
 #define G_PIXELSCALE_Y      4
-#define G_FULLSCREENMODE    true
 
-using namespace olc;
+
 
 // Override base class with your custom functionality
-class pixelTest : public PixelGameEngine
+class PixelTest_c : public PixelGameEngine
 {
 public:
-    pixelTest()
+    PixelTest_c()
     {
-        HWND wnd = GetActiveWindow();
-        if (wnd != NULL)
-        {
-            printf("hej! %x\n", wnd);
-        }
         // Name you application
         sAppName = "rajdidajs olcPixelTest";
-        
-
     }
 
 public:
@@ -58,11 +54,30 @@ int main()
     uint32_t xMax = GetSystemMetrics(SM_CXSCREEN) / G_PIXELSCALE_X;
     uint32_t yMax = GetSystemMetrics(SM_CYSCREEN) / G_PIXELSCALE_Y;
 
-    pixelTest demo;
-    if (demo.Construct(xMax, yMax, G_PIXELSCALE_X, G_PIXELSCALE_Y, G_FULLSCREENMODE))
+    StartMenu_c config;
+    if (config.Construct(xMax / 3, yMax / 3, G_PIXELSCALE_X, G_PIXELSCALE_Y, false))
     {
-        demo.Start();
-        printf("hejdå\n");
+        config.Start();
     }
+
+    PixelTest_c demo;
+
+    if (fullscreenMode)
+    {
+        if (demo.Construct(xMax, yMax, G_PIXELSCALE_X, G_PIXELSCALE_Y, fullscreenMode))
+        {
+            demo.Start();
+            printf("hejdå\n");
+        }
+    }
+    else
+    {
+        if (demo.Construct(xMax / 2, yMax / 2, G_PIXELSCALE_X, G_PIXELSCALE_Y, fullscreenMode))
+        {
+            demo.Start();
+            printf("hejdå\n");
+        }
+    }
+
     return 0;
 }
