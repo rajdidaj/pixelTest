@@ -12,6 +12,9 @@ bool fullscreenMode = false;
 #define G_PIXELSCALE_X      4
 #define G_PIXELSCALE_Y      4
 
+#define G_STARPATH          "resources/star.png"
+
+Sprite spr;
 
 
 // Override base class with your custom functionality
@@ -29,13 +32,16 @@ public:
     {
         // Called once at the start, so create things here
         Clear(DARK_BLUE);
+        SetPixelMode(olc::Pixel::MASK); // Dont draw pixels which have any transparency
+        spr.LoadFromFile(G_STARPATH, NULL);
+
         return true;
     }
 
     bool OnUserUpdate(float fElapsedTime) override
     {
         // Erase previous frame
-        //Clear(DARK_BLUE);
+        Clear(DARK_BLUE);
 
         // Called once per frame, draws random coloured pixels
         int x1 = rand() % ScreenWidth();
@@ -43,7 +49,17 @@ public:
         int x2 = rand() % ScreenWidth();
         int y2 = rand() % ScreenHeight();
 
-        DrawLine(x1, x2, y1, y2, Pixel(rand() % 256, rand() % 256, rand() % 256), 0xffffffff);
+        
+
+        DrawSprite(x1, y1, &spr, 1, x2);
+        //DrawRotatedDecal(vf2d(x1, x2), dec, y1, vf2d(y1, y2), Pixel(rand() % 256, rand() % 256, rand() % 256));
+        //DrawLine(x1, x2, y1, y2, Pixel(rand() % 256, rand() % 256, rand() % 256), 0xffffffff);
+
+        HWButton esc = GetKey(ESCAPE);
+        if (esc.bReleased)
+        {
+            olc_Terminate();
+        }
         return true;
     }
 };
@@ -75,7 +91,6 @@ int main()
         if (demo.Construct(xMax / 2, yMax / 2, G_PIXELSCALE_X, G_PIXELSCALE_Y, fullscreenMode))
         {
             demo.Start();
-            printf("hejdå\n");
         }
     }
 
