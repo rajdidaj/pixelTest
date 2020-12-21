@@ -30,8 +30,8 @@ void Dude::draw(void)
 
 void Dude::setPos(int x, int y)
 {
-    ch.x = x; // / ch.xScale;
-    ch.y = y; // / ch.yScale;
+    ch.x = x;
+    ch.y = y;
 }
 
 void Dude::setPixelScale(int x, int y)
@@ -42,15 +42,15 @@ void Dude::setPixelScale(int x, int y)
 
 void Dude::moveForward()
 {
-    setPos(ch.x + ch.xScale, ch.y);
+    setPos(ch.x + 1, ch.y);
 }
 
 void Dude::moveBack()
 {
-    setPos(ch.x - ch.xScale, ch.y);
+    setPos(ch.x - 1, ch.y);
 }
 
 void Dude::moveJump()
 {
-    setPos(ch.x, ch.y - ch.yScale);
+    setPos(ch.x, ch.y - 1);
 }
