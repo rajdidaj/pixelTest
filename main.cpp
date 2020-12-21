@@ -71,12 +71,11 @@ public:
                     break;
                 }
             }
-
         }
 
-            dude.draw();
+        dude.draw();
 
-            HWButton esc = GetKey(ESCAPE);
+        HWButton esc = GetKey(ESCAPE);
         if (esc.bReleased)
         {
             olc_Terminate();
