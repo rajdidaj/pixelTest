@@ -91,9 +91,9 @@ int main()
     uint32_t yMax = GetSystemMetrics(SM_CYSCREEN) / G_PIXELSCALE_Y;
 
     StartMenu_c config;
-    if (config.Construct(xMax / 3, yMax / 3, G_PIXELSCALE_X, G_PIXELSCALE_Y, false))
+    if (config.Construct(xMax / 2, yMax / 3, G_PIXELSCALE_X, G_PIXELSCALE_Y, false))
     {
-        //config.Start();
+        config.Start();
     }
 
     PixelTest_c demo;
