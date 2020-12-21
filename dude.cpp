@@ -17,7 +17,7 @@ void Dude::init(olc::PixelGameEngine* engine_p, int x, int y)
     engine = engine_p;
 
     ch.xMax = engine->ScreenWidth() - (G_DUDEWIDTH * ch.xScale);
-    ch.yMax = engine->ScreenHeight() - (G_DUDEHEIGHT * ch.yScale);
+    ch.yMax = engine->ScreenHeight() - (G_DUDEHEIGHT * ch.yScale) * 2;
     ch.xAcc = 0.0;
     ch.yAcc = 0.0;
 

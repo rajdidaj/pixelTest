@@ -66,7 +66,10 @@ public:
                     break;
 
                 case 2:
+                    if (!key.bHeld)
+                    {
                     dude.moveJump();
+                    }
                     break;
 
                 default:
