@@ -1,30 +1,20 @@
-//#pragma once
+#pragma once
 
 #include "engine/olcPixelGameEngine.h"
+#include "phys.h"
 
 using namespace olc;
-
-typedef struct
-{
-    int x;
-    int xScale;
-    int y;
-    int yScale;
-
-    int h;
-    int w;
-}DudeChars_t;
 
 class Dude : public PixelGameEngine
 {
 private:
     void setPixelScale(int, int);
-    DudeChars_t ch;
     Sprite sprite;
     PixelGameEngine* engine;
 
 public:
     Dude(void);
+    PhysChars_t ch;
 
     // Init functions
     void init(olc::PixelGameEngine*, int, int);
@@ -38,7 +28,7 @@ public:
     void moveJump(void);
 
     // Draw functions
-    void draw(void);
+    void draw();
 
 
 };

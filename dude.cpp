@@ -52,5 +52,6 @@ void Dude::moveBack()
 
 void Dude::moveJump()
 {
-    setPos(ch.x, ch.y - 1);
+    ch.y -= 2;
+    ch.yAcc = 10;
 }

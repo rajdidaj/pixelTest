@@ -17,6 +17,7 @@ bool fullscreenMode = true;
 
 Sprite spr;
 Dude dude;
+Phys phys;
 
 // Override base class with your custom functionality
 class PixelTest_c : public PixelGameEngine
@@ -37,6 +38,7 @@ public:
         spr.LoadFromFile(G_STARPATH, NULL);
 
         dude.init(this, G_PIXELSCALE_X, G_PIXELSCALE_Y);
+        phys.addPhysObj(&dude.ch);
 
         return true;
     }
@@ -73,6 +75,8 @@ public:
             }
         }
 
+
+        phys.run(fElapsedTime);
         dude.draw();
 
         HWButton esc = GetKey(ESCAPE);

@@ -128,10 +128,12 @@
     <ClCompile Include="dude.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="olcPixelGameEngine.cpp" />
+    <ClCompile Include="phys.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dude.h" />
     <ClInclude Include="engine\olcPixelGameEngine.h" />
+    <ClInclude Include="phys.h" />
     <ClInclude Include="startMenu.h" />
   </ItemGroup>
   <ItemGroup>

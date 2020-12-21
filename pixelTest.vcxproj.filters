@@ -24,6 +24,9 @@
     <ClCompile Include="olcPixelGameEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="phys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\olcPixelGameEngine.h">
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="dude.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="phys.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
