@@ -13,6 +13,7 @@ bool fullscreenMode = true;
 #define G_PIXELSCALE_Y      2
 
 #define G_STARPATH          "resources/star.png"
+#define G_BGCOLOR           BLACK
 
 Sprite spr;
 Dude dude;
@@ -31,7 +32,7 @@ public:
     bool OnUserCreate() override
     {
         // Called once at the start, so create things here
-        Clear(DARK_BLUE);
+        Clear(G_BGCOLOR);
         SetPixelMode(olc::Pixel::MASK); // Dont draw pixels which have any transparency
         spr.LoadFromFile(G_STARPATH, NULL);
 
@@ -43,7 +44,7 @@ public:
     bool OnUserUpdate(float fElapsedTime) override
     {
         // Erase previous frame
-        Clear(DARK_BLUE);
+        Clear(G_BGCOLOR);
 
         // Called once per frame, draws random coloured pixels
         Key keys[] = { LEFT , RIGHT, SPACE };
