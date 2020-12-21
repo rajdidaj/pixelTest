@@ -20,7 +20,7 @@ void Phys::run(float dT)
         if ((*it)->yAcc != 0.0)
         {
             printf("Acc: %f\n", (*it)->yAcc);
-            (*it)->yAcc -= (*it)->yAcc * (dT * 50);
+            (*it)->yAcc -= (dT * 98);
             (*it)->y -= (*it)->yAcc;
         }
 
