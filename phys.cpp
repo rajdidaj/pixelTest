@@ -19,13 +19,21 @@ void Phys::run(float dT)
         // Calculate physics for each object
         if ((*it)->yAcc != 0.0)
         {
-            (*it)->y -= 0.2 * dT * (*it)->y;
-            (*it)->yAcc -= (*it)->yAcc * 9.8 * dT;
+            printf("Acc: %f\n", (*it)->yAcc);
+            (*it)->yAcc -= (*it)->yAcc * (dT * 50);
+            (*it)->y -= (*it)->yAcc;
         }
 
-        if ((*it)->y >= (*it)->yMax)
+        if ((*it)->y <= 0)
         {
             (*it)->yAcc = 0.0;
+            (*it)->y = 0;
         }
+        else if( (*it)->y >= (*it)->yMax)
+        {
+            (*it)->yAcc = 0.0;
+            (*it)->y = (*it)->yMax;
+        }
+
     }
 }
