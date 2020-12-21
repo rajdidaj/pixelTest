@@ -17,10 +17,15 @@ void Phys::run(float dT)
     for (it = physObjs.begin(); it != physObjs.end(); ++it)
     {
         // Calculate physics for each object
-        if ((*it)->yAcc > 0)
+        if ((*it)->yAcc != 0.0)
         {
             (*it)->y -= 0.2 * dT * (*it)->y;
-            (*it)->yAcc = (*it)->yAcc / 3;
+            (*it)->yAcc -= (*it)->yAcc * 9.8 * dT;
+        }
+
+        if ((*it)->y >= (*it)->yMax)
+        {
+            (*it)->yAcc = 0.0;
         }
     }
 }

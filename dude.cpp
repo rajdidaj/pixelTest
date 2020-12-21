@@ -16,10 +16,15 @@ void Dude::init(olc::PixelGameEngine* engine_p, int x, int y)
 {
     engine = engine_p;
 
+    ch.xMax = engine->ScreenWidth() - (G_DUDEWIDTH * ch.xScale);
+    ch.yMax = engine->ScreenHeight() - (G_DUDEHEIGHT * ch.yScale);
+    ch.xAcc = 0.0;
+    ch.yAcc = 0.0;
+
     setPixelScale(x, y);
 
     sprite.LoadFromFile(G_DUDEPATH, NULL);
-    setPos(0, engine->ScreenHeight() - (G_DUDEHEIGHT * ch.yScale));
+    setPos(0, ch.yMax);
 
 }
 
@@ -52,6 +57,5 @@ void Dude::moveBack()
 
 void Dude::moveJump()
 {
-    ch.y -= 2;
     ch.yAcc = 10;
 }

@@ -8,10 +8,12 @@ typedef struct
     int x;
     int xScale;
     float xAcc;
+    int xMax;
 
     int y;
     int yScale;
     float yAcc;
+    int yMax;
 
     int h;
     int w;

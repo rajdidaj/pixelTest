@@ -65,7 +65,12 @@ public:
                 {
                     olc_Terminate();
                 }
+            }
 
+            HWButton btn = GetKey(ESCAPE);
+            if (btn.bReleased)
+            {
+                olc_Terminate();
             }
 
             if (fullscreenMode)
