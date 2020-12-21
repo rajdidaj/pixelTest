@@ -51,8 +51,8 @@ public:
                 // Full screen setting clicked?
                 textSize = GetTextSize(menuStr[G_FULLSCREEN_TEXTIX]);
                 yPos = GetMouseY();
-                if (yPos >= G_FULLSCREEN_TEXTIX * (ScreenHeight() / numChoices) - (textSize.y / 2) &&
-                    yPos <= G_FULLSCREEN_TEXTIX * (ScreenHeight() / numChoices) + (textSize.y / 2))
+                if (yPos >= G_FULLSCREEN_TEXTIX * (ScreenHeight() / numChoices) &&
+                    yPos <= G_FULLSCREEN_TEXTIX * (ScreenHeight() / numChoices) + textSize.y)
                 {
                     fullscreenMode ^= true;
                 }
@@ -60,8 +60,8 @@ public:
                 // Start clicked?
                 textSize = GetTextSize(menuStr[G_START_TEXTIX]);
                 yPos = GetMouseY();
-                if (yPos >= G_START_TEXTIX * (ScreenHeight() / numChoices) - (textSize.y / 2) &&
-                    yPos <= G_START_TEXTIX * (ScreenHeight() / numChoices) + (textSize.y / 2))
+                if (yPos >= G_START_TEXTIX * (ScreenHeight() / numChoices) &&
+                    yPos <= G_START_TEXTIX * (ScreenHeight() / numChoices) + textSize.y)
                 {
                     olc_Terminate();
                 }

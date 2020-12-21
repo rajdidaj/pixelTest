@@ -103,7 +103,6 @@ int main()
         if (demo.Construct(xMax, yMax, G_PIXELSCALE_X, G_PIXELSCALE_Y, fullscreenMode))
         {
             demo.Start();
-            printf("hejdå\n");
         }
     }
     else
