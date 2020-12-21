@@ -19,22 +19,38 @@ void Dude::init(olc::PixelGameEngine* engine_p, int x, int y)
     setPixelScale(x, y);
 
     sprite.LoadFromFile(G_DUDEPATH, NULL);
+    setPos(0, engine->ScreenHeight() - (G_DUDEHEIGHT * ch.yScale));
+
 }
 
 void Dude::draw(void)
 {
-    printf("x: %d, y: %d\n", ch.x, ch.y);
     engine->DrawSprite(ch.x, ch.y, &sprite);
 }
 
 void Dude::setPos(int x, int y)
 {
-    ch.x = x / ch.xScale;
-    ch.y = y / ch.yScale;
+    ch.x = x; // / ch.xScale;
+    ch.y = y; // / ch.yScale;
 }
 
 void Dude::setPixelScale(int x, int y)
 {
     ch.xScale = x;
     ch.yScale = y;
+}
+
+void Dude::moveForward()
+{
+    setPos(ch.x + ch.xScale, ch.y);
+}
+
+void Dude::moveBack()
+{
+    setPos(ch.x - ch.xScale, ch.y);
+}
+
+void Dude::moveJump()
+{
+    setPos(ch.x, ch.y - ch.yScale);
 }

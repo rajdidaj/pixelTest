@@ -9,8 +9,8 @@ bool fullscreenMode = true;
 #include "startMenu.h"
 #include "dude.h"
 
-#define G_PIXELSCALE_X      4
-#define G_PIXELSCALE_Y      4
+#define G_PIXELSCALE_X      2
+#define G_PIXELSCALE_Y      2
 
 #define G_STARPATH          "resources/star.png"
 
@@ -31,7 +31,7 @@ public:
     bool OnUserCreate() override
     {
         // Called once at the start, so create things here
-        Clear(BLACK);
+        Clear(DARK_BLUE);
         SetPixelMode(olc::Pixel::MASK); // Dont draw pixels which have any transparency
         spr.LoadFromFile(G_STARPATH, NULL);
 
@@ -43,15 +43,39 @@ public:
     bool OnUserUpdate(float fElapsedTime) override
     {
         // Erase previous frame
-        Clear(BLACK);
+        Clear(DARK_BLUE);
 
         // Called once per frame, draws random coloured pixels
-        vi2d mPos = GetWindowMouse();
+        Key keys[] = { LEFT , RIGHT, SPACE };
+        for (int k = 0; k < sizeof(keys) / sizeof(Key); k++)
+        {
+            HWButton key = GetKey(keys[k]);
+            if ((key.bReleased || key.bHeld) && (fElapsedTime >= 0.001))
+            {
+                switch (k)
+                {
+                case 0:
+                    dude.moveBack();
+                    break;
 
-        dude.setPos(mPos.x, mPos.y);
-        dude.draw();
+                case 1:
+                    dude.moveForward();
+                    break;
 
-        HWButton esc = GetKey(ESCAPE);
+                case 2:
+                    dude.moveJump();
+                    break;
+
+                default:
+                    break;
+                }
+            }
+
+        }
+
+            dude.draw();
+
+            HWButton esc = GetKey(ESCAPE);
         if (esc.bReleased)
         {
             olc_Terminate();

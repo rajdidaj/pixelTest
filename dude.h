@@ -18,6 +18,7 @@ typedef struct
 class Dude : public PixelGameEngine
 {
 private:
+    void setPixelScale(int, int);
     DudeChars_t ch;
     Sprite sprite;
     PixelGameEngine* engine;
@@ -30,7 +31,11 @@ public:
 
     // Test functions
     void setPos(int, int);
-    void setPixelScale(int, int);
+
+    // Control functions
+    void moveForward(void);
+    void moveBack(void);
+    void moveJump(void);
 
     // Draw functions
     void draw(void);
