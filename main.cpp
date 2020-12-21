@@ -2,12 +2,12 @@
 // O------------------------------------------------------------------------------O
 // | PixelTest_c "Hello World" Program (main.cpp)                                     |
 // O------------------------------------------------------------------------------O
-#define OLC_PGE_APPLICATION
 #include "engine/olcPixelGameEngine.h"
 using namespace olc;
-bool fullscreenMode = false;
+bool fullscreenMode = true;
 
 #include "startMenu.h"
+#include "dude.h"
 
 #define G_PIXELSCALE_X      4
 #define G_PIXELSCALE_Y      4
@@ -15,7 +15,7 @@ bool fullscreenMode = false;
 #define G_STARPATH          "resources/star.png"
 
 Sprite spr;
-
+Dude dude;
 
 // Override base class with your custom functionality
 class PixelTest_c : public PixelGameEngine
@@ -31,9 +31,11 @@ public:
     bool OnUserCreate() override
     {
         // Called once at the start, so create things here
-        Clear(DARK_BLUE);
+        Clear(BLACK);
         SetPixelMode(olc::Pixel::MASK); // Dont draw pixels which have any transparency
         spr.LoadFromFile(G_STARPATH, NULL);
+
+        dude.init(this, G_PIXELSCALE_X, G_PIXELSCALE_Y);
 
         return true;
     }
@@ -41,19 +43,13 @@ public:
     bool OnUserUpdate(float fElapsedTime) override
     {
         // Erase previous frame
-        Clear(DARK_BLUE);
+        Clear(BLACK);
 
         // Called once per frame, draws random coloured pixels
-        int x1 = rand() % ScreenWidth();
-        int y1 = rand() % ScreenHeight();
-        int x2 = rand() % ScreenWidth();
-        int y2 = rand() % ScreenHeight();
+        vi2d mPos = GetWindowMouse();
 
-        
-
-        DrawSprite(x1, y1, &spr, 1, x2);
-        //DrawRotatedDecal(vf2d(x1, x2), dec, y1, vf2d(y1, y2), Pixel(rand() % 256, rand() % 256, rand() % 256));
-        //DrawLine(x1, x2, y1, y2, Pixel(rand() % 256, rand() % 256, rand() % 256), 0xffffffff);
+        dude.setPos(mPos.x, mPos.y);
+        dude.draw();
 
         HWButton esc = GetKey(ESCAPE);
         if (esc.bReleased)
@@ -73,7 +69,7 @@ int main()
     StartMenu_c config;
     if (config.Construct(xMax / 3, yMax / 3, G_PIXELSCALE_X, G_PIXELSCALE_Y, false))
     {
-        config.Start();
+        //config.Start();
     }
 
     PixelTest_c demo;

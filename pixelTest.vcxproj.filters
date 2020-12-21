@@ -21,6 +21,12 @@
     <ClCompile Include="startMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dude.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="olcPixelGameEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\olcPixelGameEngine.h">
@@ -29,12 +35,18 @@
     <ClInclude Include="startMenu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="dude.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\star.bmp">
+    <Image Include="resources\dude.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\star.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
