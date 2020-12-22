@@ -48,8 +48,8 @@ public:
         // Erase previous frame
         Clear(G_BGCOLOR);
 
-        // Called once per frame, draws random coloured pixels
-        Key keys[] = { LEFT , RIGHT, SPACE };
+        // Check for keypresses at least every millisecond
+        Key keys[] = { A, LEFT, D, RIGHT, SPACE };
         for (int k = 0; k < sizeof(keys) / sizeof(Key); k++)
         {
             HWButton key = GetKey(keys[k]);
@@ -57,15 +57,15 @@ public:
             {
                 switch (k)
                 {
-                case 0:
+                case 0: case 1:
                     dude.moveBack();
                     break;
 
-                case 1:
+                case 2: case 3:
                     dude.moveForward();
                     break;
 
-                case 2:
+                case 4:
                     dude.moveJump();
                     break;
 
