@@ -21,7 +21,7 @@ void Phys::run(float dT)
         // Calculate physics for each object
         if (CHARS(it)->yAcc != 0.0)
         {
-            CHARS(it)->yAcc -= (dT * 98);
+            CHARS(it)->yAcc -= (dT * 50);
             CHARS(it)->y -= CHARS(it)->yAcc;
         }
 

@@ -57,5 +57,5 @@ void Dude::moveBack()
 
 void Dude::moveJump()
 {
-    ch.yAcc = 10;
+    ch.yAcc = 5;
 }
