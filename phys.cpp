@@ -21,7 +21,6 @@ void Phys::run(float dT)
         // Calculate physics for each object
         if (CHARS(it)->yAcc != 0.0)
         {
-            printf("Acc: %f\n", CHARS(it)->yAcc);
             CHARS(it)->yAcc -= (dT * 98);
             CHARS(it)->y -= CHARS(it)->yAcc;
         }
@@ -31,6 +30,7 @@ void Phys::run(float dT)
             CHARS(it)->yAcc = 0.0;
             CHARS(it)->y = CHARS(it)->yMax;
         }
+        //printf("Acc: %f\n", CHARS(it)->yAcc);
 
     }
 }

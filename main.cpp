@@ -52,21 +52,49 @@ public:
         Key keys[] = { A, LEFT, D, RIGHT, SPACE };
         for (int k = 0; k < sizeof(keys) / sizeof(Key); k++)
         {
+            static bool jumpLatch = false;
+            static int jumpCtr = 0;
+            bool jump = false;
+
             HWButton key = GetKey(keys[k]);
-            if ((key.bPressed || key.bHeld) && (fElapsedTime >= 0.001))
+            if (fElapsedTime >= 0.001)
             {
                 switch (k)
                 {
                 case 0: case 1:
-                    dude.moveBack();
+                    if (key.bPressed || key.bHeld)
+                    {
+                        dude.moveBack();
+                    }
                     break;
 
                 case 2: case 3:
-                    dude.moveForward();
+                    if (key.bPressed || key.bHeld)
+                    {
+                        dude.moveForward();
+                    }
                     break;
 
                 case 4:
-                    dude.moveJump();
+                    if (key.bPressed && !jumpLatch)
+                    {
+                        jumpLatch = true;
+                        jump = true;
+                    }
+                    else if (key.bReleased && jumpLatch)
+                    {
+                        jumpLatch = false;
+                    }
+
+                    if (jump && (jumpCtr < 2))
+                    {
+                        dude.moveJump();                        
+                        jumpCtr++;
+                    }
+                    else if (dude.ch.yAcc == 0.0)
+                    {
+                        jumpCtr = 0;
+                    }
                     break;
 
                 default:
