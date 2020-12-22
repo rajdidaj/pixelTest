@@ -2,6 +2,7 @@
 #define G_DUDEPATH          "resources/dude.png"
 #define G_DUDEHEIGHT        32
 #define G_DUDEWIDTH         32
+#define G_DEFAULT_HP        1000
 
 // Constructor
 Dude::Dude(void)
@@ -10,6 +11,7 @@ Dude::Dude(void)
     setPos(0, 0);
     ch.h = G_DUDEHEIGHT;
     ch.w = G_DUDEWIDTH;
+    setHp(-1);
 }
 
 void Dude::init(olc::PixelGameEngine* engine_p, int x, int y)
@@ -58,4 +60,30 @@ void Dude::moveBack()
 void Dude::moveJump()
 {
     ch.yAcc = 5;
+}
+
+void Dude::decHp(int dec)
+{
+    if (hp > 0)
+    {
+        hp -= dec;
+    }
+
+    if (hp < 0)
+    {
+        hp = 0;
+    }
+}
+
+// Set a new HP value, a negative value will set it to default
+void Dude::setHp(int newHp)
+{
+    if (newHp >= 0)
+    {
+        hp = newHp;
+    }
+    else
+    {
+        hp = G_DEFAULT_HP;
+    }
 }

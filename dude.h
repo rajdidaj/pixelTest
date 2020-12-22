@@ -8,9 +8,11 @@ using namespace olc;
 class Dude : public PixelGameEngine
 {
 private:
-    void setPixelScale(int, int);
-    Sprite sprite;
     PixelGameEngine* engine;
+    Sprite sprite;
+    int hp;
+
+    void setPixelScale(int, int);
 
 public:
     Dude(void);
@@ -26,6 +28,8 @@ public:
     void moveForward(void);
     void moveBack(void);
     void moveJump(void);
+    void decHp(int);
+    void setHp(int);
 
     // Draw functions
     void draw();
