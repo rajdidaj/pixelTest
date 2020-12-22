@@ -1,7 +1,9 @@
 #include "dude.h"
 #define G_DUDEPATH          "resources/dude.png"
-#define G_DUDEHEIGHT        32
-#define G_DUDEWIDTH         32
+#define G_DUDEHEIGHT        64      // Full height of the dude
+#define G_DUDEWIDTH         29      // Full width of the dude
+#define G_DUDEOFFSET        33      // Offset to the empty dude template
+#define G_HEALTHEIGHT       2       // Height of a health slice
 #define G_DEFAULT_HP        1000
 
 // Constructor
@@ -19,7 +21,7 @@ void Dude::init(olc::PixelGameEngine* engine_p, int x, int y)
     engine = engine_p;
 
     ch.xMax = engine->ScreenWidth() - (G_DUDEWIDTH * ch.xScale);
-    ch.yMax = engine->ScreenHeight() - (G_DUDEHEIGHT * ch.yScale) * 2;
+    ch.yMax = engine->ScreenHeight() - (G_DUDEHEIGHT * ch.yScale);
     ch.xAcc = 0.0;
     ch.yAcc = 0.0;
 
@@ -32,7 +34,16 @@ void Dude::init(olc::PixelGameEngine* engine_p, int x, int y)
 
 void Dude::draw(void)
 {
-    engine->DrawSprite(ch.x, ch.y, &sprite);
+    //engine->DrawSprite(ch.x, ch.y, &sprite);
+
+    // Main body (full HP)
+    engine->DrawPartialSprite(ch.x, ch.y, &sprite, 
+        G_DUDEOFFSET, 0, G_DUDEWIDTH, G_DUDEHEIGHT);
+
+    // Overlay the empty HP depeding on health amount
+    int healthY = G_DUDEHEIGHT - (((float)G_DUDEHEIGHT / (float)G_DEFAULT_HP) * (float)hp);
+    engine->DrawPartialSprite(ch.x, ch.y + healthY, &sprite,
+        0, healthY, G_DUDEWIDTH, G_DUDEHEIGHT);
 }
 
 void Dude::setPos(int x, int y)
@@ -62,17 +73,35 @@ void Dude::moveJump()
     ch.yAcc = 5;
 }
 
-void Dude::decHp(int dec)
+void Dude::decHp(int val)
 {
     if (hp > 0)
     {
-        hp -= dec;
+        hp -= val;
     }
 
     if (hp < 0)
     {
         hp = 0;
     }
+}
+
+void Dude::incHp(int val)
+{
+    if (hp < G_DEFAULT_HP)
+    {
+        hp += val;
+    }
+
+    if (hp > G_DEFAULT_HP)
+    {
+        hp = G_DEFAULT_HP;
+    }
+}
+
+int Dude::getHp(void)
+{
+    return hp;
 }
 
 // Set a new HP value, a negative value will set it to default

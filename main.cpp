@@ -53,6 +53,19 @@ public:
         // Check for keypresses at least every millisecond
         userInput(this, fElapsedTime);
 
+        static float decTimer = 0.0;
+        decTimer += fElapsedTime;
+        if (decTimer >= 0.005)
+        {
+            decTimer = 0.0;
+
+            dude.decHp(2);
+            if (!dude.getHp())
+            {
+                dude.setHp(-1);
+            }
+        }
+
         phys.run(fElapsedTime);
         dude.draw();
 

@@ -29,7 +29,9 @@ public:
     void moveBack(void);
     void moveJump(void);
     void decHp(int);
+    void incHp(int);
     void setHp(int);
+    int getHp(void);
 
     // Draw functions
     void draw();
