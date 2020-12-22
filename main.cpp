@@ -53,7 +53,7 @@ public:
         for (int k = 0; k < sizeof(keys) / sizeof(Key); k++)
         {
             HWButton key = GetKey(keys[k]);
-            if ((key.bReleased || key.bHeld) && (fElapsedTime >= 0.001))
+            if ((key.bPressed || key.bHeld) && (fElapsedTime >= 0.001))
             {
                 switch (k)
                 {
@@ -66,10 +66,7 @@ public:
                     break;
 
                 case 2:
-                    if (!key.bHeld)
-                    {
                     dude.moveJump();
-                    }
                     break;
 
                 default:

@@ -1,5 +1,7 @@
 #include "phys.h"
 
+#define CHARS(x) (*x)
+
 Phys::Phys(void)
 {
     physObjs.clear();
@@ -17,22 +19,17 @@ void Phys::run(float dT)
     for (it = physObjs.begin(); it != physObjs.end(); ++it)
     {
         // Calculate physics for each object
-        if ((*it)->yAcc != 0.0)
+        if (CHARS(it)->yAcc != 0.0)
         {
-            printf("Acc: %f\n", (*it)->yAcc);
-            (*it)->yAcc -= (dT * 98);
-            (*it)->y -= (*it)->yAcc;
+            printf("Acc: %f\n", CHARS(it)->yAcc);
+            CHARS(it)->yAcc -= (dT * 98);
+            CHARS(it)->y -= CHARS(it)->yAcc;
         }
 
-        if ((*it)->y <= 0)
+        if (CHARS(it)->y >= CHARS(it)->yMax)
         {
-            (*it)->yAcc = 0.0;
-            (*it)->y = 0;
-        }
-        else if( (*it)->y >= (*it)->yMax)
-        {
-            (*it)->yAcc = 0.0;
-            (*it)->y = (*it)->yMax;
+            CHARS(it)->yAcc = 0.0;
+            CHARS(it)->y = CHARS(it)->yMax;
         }
 
     }
