@@ -1,12 +1,13 @@
 #include "phys.h"
 
-#define CHARS(x) (*x)
+#define OBJ(x) (*x)
 
 Phys::Phys(void)
 {
     physObjs.clear();
 }
 
+// Insert a new physics object into the list
 void Phys::addPhysObj(PhysChars_t* obj)
 {
     physObjs.insert(physObjs.end(), obj);
@@ -18,19 +19,19 @@ void Phys::run(float dT)
     list<PhysChars_t*>::iterator it;
     for (it = physObjs.begin(); it != physObjs.end(); ++it)
     {
-        // Calculate physics for each object
-        if (CHARS(it)->yAcc != 0.0)
+        // Calculate y axis, gravity for each object
+        if (OBJ(it)->yAcc != 0.0)
         {
-            CHARS(it)->yAcc -= (dT * 50);
-            CHARS(it)->y -= CHARS(it)->yAcc;
+            OBJ(it)->yAcc -= (dT * 50);
+            OBJ(it)->y -= OBJ(it)->yAcc;
         }
 
-        if (CHARS(it)->y >= CHARS(it)->yMax)
+        if (OBJ(it)->y >= OBJ(it)->yMax)
         {
-            CHARS(it)->yAcc = 0.0;
-            CHARS(it)->y = CHARS(it)->yMax;
+            OBJ(it)->yAcc = 0.0;
+            OBJ(it)->y = OBJ(it)->yMax;
         }
-        //printf("Acc: %f\n", CHARS(it)->yAcc);
+        //printf("Acc: %f\n", OBJ(it)->yAcc);
 
     }
 }

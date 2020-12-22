@@ -15,6 +15,8 @@ bool fullscreenMode = true;
 #define G_STARPATH          "resources/star.png"
 #define G_BGCOLOR           BLACK
 
+static void userInput(PixelGameEngine*, float);
+
 Sprite spr;
 Dude dude;
 Phys phys;
@@ -49,60 +51,7 @@ public:
         Clear(G_BGCOLOR);
 
         // Check for keypresses at least every millisecond
-        Key keys[] = { A, LEFT, D, RIGHT, SPACE };
-        for (int k = 0; k < sizeof(keys) / sizeof(Key); k++)
-        {
-            static bool jumpLatch = false;
-            static int jumpCtr = 0;
-            bool jump = false;
-
-            HWButton key = GetKey(keys[k]);
-            if (fElapsedTime >= 0.001)
-            {
-                switch (k)
-                {
-                case 0: case 1:
-                    if (key.bPressed || key.bHeld)
-                    {
-                        dude.moveBack();
-                    }
-                    break;
-
-                case 2: case 3:
-                    if (key.bPressed || key.bHeld)
-                    {
-                        dude.moveForward();
-                    }
-                    break;
-
-                case 4:
-                    if (key.bPressed && !jumpLatch)
-                    {
-                        jumpLatch = true;
-                        jump = true;
-                    }
-                    else if (key.bReleased && jumpLatch)
-                    {
-                        jumpLatch = false;
-                    }
-
-                    if (jump && (jumpCtr < 2))
-                    {
-                        dude.moveJump();                        
-                        jumpCtr++;
-                    }
-                    else if (dude.ch.yAcc == 0.0)
-                    {
-                        jumpCtr = 0;
-                    }
-                    break;
-
-                default:
-                    break;
-                }
-            }
-        }
-
+        userInput(this, fElapsedTime);
 
         phys.run(fElapsedTime);
         dude.draw();
@@ -125,7 +74,7 @@ int main()
     StartMenu_c config;
     if (config.Construct(xMax / 2, yMax / 3, G_PIXELSCALE_X, G_PIXELSCALE_Y, false))
     {
-        config.Start();
+        //config.Start();
     }
 
     PixelTest_c demo;
@@ -146,4 +95,96 @@ int main()
     }
 
     return 0;
+}
+
+// Checks for user input on all applicable keys
+static void userInput(PixelGameEngine* engine,float fElapsedTime)
+{
+    enum keyIndex
+    {
+        KEY_LEFT = 0,
+        KEY_LEFT_ALTERNATIVE,
+        KEY_RIGHT,
+        KEY_RIGHT_ALTERNATIVE,
+        KEY_JUMP,
+        KEY_JUMP_ALTERNATIVE,
+        KEY_BOOST,
+        KEY_BOOST_ALTERNATIVE,
+        
+        KEY_MAX
+    };
+    
+    static enum Key keys[KEY_MAX] = { (enum Key)0 };
+    static bool initFlag = true;
+
+    if (initFlag)
+    {
+        // KEY_LEFT
+        keys[KEY_LEFT] = A;
+        keys[KEY_LEFT_ALTERNATIVE] = LEFT;
+        // KEY_RIGHT
+        keys[KEY_RIGHT] = D;
+        keys[KEY_RIGHT_ALTERNATIVE] = RIGHT;
+        //  KEY_JUMP
+        keys[KEY_JUMP] = SPACE;
+        keys[KEY_JUMP_ALTERNATIVE] = UP;
+        // KEY_BOOST
+        keys[KEY_BOOST] = SHIFT;
+        keys[KEY_BOOST_ALTERNATIVE] = X;
+
+        initFlag = false;
+    }
+   
+    for (int k = 0; k < KEY_MAX; k++)
+    {
+        static bool jumpLatch = false;
+        static int jumpCtr = 0;
+        bool jump = false;
+
+        HWButton key = engine->GetKey(keys[k]);
+        if (fElapsedTime >= 0.001)
+        {
+            switch (k)
+            {
+            case 0: case 1:
+                if (key.bPressed || key.bHeld)
+                {
+                    dude.moveBack();
+                }
+                break;
+
+            case 2: case 3:
+                if (key.bPressed || key.bHeld)
+                {
+                    dude.moveForward();
+                }
+                break;
+
+            case 4:
+                if (key.bPressed && !jumpLatch)
+                {
+                    jumpLatch = true;
+                    jump = true;
+                }
+                else if (key.bReleased && jumpLatch)
+                {
+                    jumpLatch = false;
+                }
+
+                if (jump && (jumpCtr < 2))
+                {
+                    dude.moveJump();
+                    jumpCtr++;
+                }
+                else if (dude.ch.yAcc == 0.0)
+                {
+                    jumpCtr = 0;
+                }
+                break;
+
+            default:
+                break;
+            }
+        }
+    }
 }
