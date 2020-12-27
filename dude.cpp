@@ -3,7 +3,6 @@
 #define G_DUDEHEIGHT        64      // Full height of the dude
 #define G_DUDEWIDTH         29      // Full width of the dude
 #define G_DUDEOFFSET        33      // Offset to the empty dude template
-#define G_HEALTHEIGHT       2       // Height of a health slice
 #define G_DEFAULT_HP        1000
 
 // Constructor
